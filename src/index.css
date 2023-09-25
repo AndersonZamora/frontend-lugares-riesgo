@@ -1,0 +1,202 @@
+body {
+  height: 100%;
+}
+
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 1rem
+}
+
+.border-left-primary {
+  border-left: 0.25rem solid #4e73df !important;
+  cursor: pointer;
+}
+
+.border-left-success {
+  border-left: 0.25rem solid #1cc88a !important;
+  cursor: pointer;
+}
+
+.border-left-warning {
+  border-left: 0.25rem solid #f6c23e !important;
+  cursor: pointer;
+}
+
+.back-dashboard {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.fab {
+  border-radius: 100%;
+  bottom: 25px;
+  font-size: 20px;
+  padding: 18px;
+  position: fixed;
+  right: 25px;
+}
+
+.alertInput {
+  color: #bf1650;
+}
+
+.info-account-title {
+  background-color: #b7b7b7;
+  color: #fff;
+  display: flex;
+  margin-left: 10p;
+  flex-wrap: inherit;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info-account-title h4 {
+  padding: 10px 10px 10px 10px;
+  font-weight: 600;
+}
+
+.info-account-row {
+  padding: 0px 0px 10px 10px;
+  border: 1px solid #eae8e8;
+  margin: 0px;
+}
+
+.sub-header {
+  color: #838383;
+}
+
+.sub-body {
+  color: #0a0909;
+}
+
+.sub-contrasenia {
+  cursor: pointer;
+}
+
+.fa-color {
+  margin-right: 20px;
+  cursor: pointer;
+  color: #0a0909;
+  font-size: 20px;
+}
+
+.container .page {
+  background-color: #007AFF;
+  margin: 0.5rem;
+  font-weight: 700;
+  border-radius: 5rem;
+  padding: 0.2rem 0.6rem 0.2rem 0.6rem;
+  color: #fff;
+}
+
+.pagination {
+  margin: 2rem;
+}
+
+.dataTables_info {
+  display: none;
+}
+
+.info-account-service {
+  background-color: #b7b7b7;
+  color: #fff;
+  padding: 5px;
+  flex-wrap: inherit;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.color-disabled {
+  color: #0a0909 !important;
+}
+
+.navbar-brand {
+  color: white !important;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+  color: white;
+  font: icon;
+  animation-duration: 4s;
+  animation-delay: 4s;
+  animation-iteration-count: 3;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+  color: #ede14a;
+  font: icon;
+  animation-duration: 10s;
+}
+
+.navbar-brand:focus,
+.navbar-brand:hover {
+  color: white;
+}
+
+.navbar-toggler {
+  background-color: white !important;
+}
+
+.mapContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.info {
+  position: fixed;
+  top: 70px;
+  left: 20px;
+  border-radius: 20px;
+  z-index: 99;
+  background-color: rgb(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+}
+
+.info1 {
+  font-size: 0.9rem;
+}
+
+.view-displ {
+  display: none;
+}
+
+@media (max-width: 990px) {
+  .view-displ {
+    display: block;
+  }
+
+  .view-displ-nor {
+    display: none;
+  }
+}
+
+/* .mapboxgl-marker {
+  background-image: url('https://docs.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+} */
+
+/* .mapboxgl-marker svg {
+  display: none;
+} */
+
+/* .mapboxgl-popup {
+  max-width: 200px;
+} */
