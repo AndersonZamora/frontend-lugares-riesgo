@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { LocPage, LoginPage, SignupPage } from '../auth';
 import { CitizenRouter } from '../citizen';
 import { useAuthStore } from '../hooks';
+import { LayoutChecking } from '../layout';
 
 export const AppRouter = () => {
 
@@ -14,10 +15,9 @@ export const AppRouter = () => {
 
     if (status === 'checking') {
         return (
-            <h1>Cargando...</h1>
+            <LayoutChecking />
         )
     }
-
 
     return (
         <Routes>

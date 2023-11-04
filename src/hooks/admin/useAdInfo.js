@@ -11,6 +11,7 @@ export const useAdInfo = () => {
     const navigate = useNavigate();
 
     const { infos, isLoadingInfo, infoActive } = useSelector(state => state.auinfo);
+
     const { viewInfo } = useSelector(state => state.ui);
 
     const startLoadingInfo = async () => {
@@ -30,13 +31,11 @@ export const useAdInfo = () => {
         try {
             progressBar('Registrando...');
             const { data } = await citizenApi.post('/joho', model);
-            console.log(data);
             dispatch(onAddNewInfo({ Id: data.uid, ...model }));
             successAlert('Resgistrado');
             Swal.close();
             navigate('/info');
         } catch (error) {
-            console.log(error);
             Swal.close();
             errorAlert('Error al registrar');
         }

@@ -4,9 +4,8 @@ export const usalertSclice = createSlice({
     name: 'alert',
     initialState: {
         isLoadingAlert: false,
-        alerts: [
-            // tempEvent
-        ],
+        alerts: [],
+        tempId: 0,
         alertActive: {
             Id: 0,
             fehca: '',
@@ -18,6 +17,9 @@ export const usalertSclice = createSlice({
         total: 0,
     },
     reducers: {
+        onClearAlert: (state) => {
+            state.alerts = [];
+        },
         onLoadAlerts: (state, { payload = [] }) => {
             payload.forEach(usr => {
                 const exists = state.alerts.some(dbPro => dbPro.Id === usr.Id);
@@ -31,11 +33,17 @@ export const usalertSclice = createSlice({
             state.alerts = payload;
         },
         onAddNewAlert: (state, { payload = {} }) => {
-
             const exists = state.alerts.some(dbPro => dbPro.Id === payload.Id);
             if (!exists) {
+                state.alertActive = payload;
                 state.alerts.push(payload);
                 state.total = state.alerts.length;
+            }
+        },
+        onTemId: (state, { payload }) => {
+            console.log(payload);
+            if (state.tempId != payload) {
+                state.tempId = payload;
             }
         },
         onViewAlert: (state, { payload }) => {
@@ -43,6 +51,19 @@ export const usalertSclice = createSlice({
         },
         onIsLoagingAlert: (state, { payload }) => {
             state.isLoadingAlert = payload
+        },
+        onUpdateAlert: (state, { payload = {} }) => {
+            console.log(payload)
+            state.alerts = state.alerts.map(cat => {
+                if (cat.Id === payload.id) {
+                    return { ...cat, estado: payload.estado };
+                }
+                return cat;
+            });
+        },
+        onDeleteAlert: (state, { payload = 0 }) => {
+            state.alerts = state.alerts.filter(cat => cat.Id !== payload);
+            state.total = state.alerts.length;
         },
         onLogoutAlert: (state) => {
             state.isLoadingAlert = false;
@@ -56,8 +77,9 @@ export const usalertSclice = createSlice({
                 longitud: '',
                 latitud: '',
                 est: false
-            },
-                state.total = 0;
+            };
+            state.tempId = 0;
+            state.total = 0;
         },
         onSetTotal: (state, { payload }) => {
             state.total = payload;
@@ -72,5 +94,9 @@ export const {
     onLogoutAlert,
     onLoadAlerts,
     onSetTotal,
+    onTemId,
     onLoadAlertsScokets,
+    onUpdateAlert,
+    onDeleteAlert,
+    onClearAlert
 } = usalertSclice.actions;

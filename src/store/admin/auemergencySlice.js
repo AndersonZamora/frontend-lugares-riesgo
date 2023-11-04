@@ -4,9 +4,7 @@ export const auemergencySlice = createSlice({
     name: 'gency',
     initialState: {
         isLoadingGency: false,
-        gencys: [
-            // tempEvent
-        ],
+        gencys: [],
         gencyActive: {
             Id: 0,
             tipo: '',
@@ -38,7 +36,7 @@ export const auemergencySlice = createSlice({
         onLogoutGency: (state) => {
             state.isLoadingGency = false;
             state.gencys = [];
-            gencyActive = {
+            state.gencyActive = {
                 Id: 0,
                 tipo: '',
                 celular: '',

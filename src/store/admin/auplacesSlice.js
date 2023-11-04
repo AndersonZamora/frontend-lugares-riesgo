@@ -4,9 +4,7 @@ export const auplacesSlice = createSlice({
     name: 'places',
     initialState: {
         isLoadingPlaces: false,
-        places: [
-            // tempEvent
-        ],
+        places: [],
         placeActive: {
             Id: 0,
             detalle: '',

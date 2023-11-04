@@ -11,7 +11,6 @@ export const HomeEmergency = () => {
         startLoadingGency();
     }, [])
 
-
     return (
         <LayoutContainer>
             <div className="row">

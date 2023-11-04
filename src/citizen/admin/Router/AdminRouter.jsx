@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 import { DetailEmergency, DetailInfo, DetailPlace, DetailSerene, DetailUser, HomeAdmin, HomeEmergency, HomeInfo, HomePlace, HomeSerene, HomeUser, NavAdmin, NewEmergency, NewInfo, NewPlace, NewSerene, PerfilAdmin } from '../';
 import { useUi } from '../../../hooks';
-import { useEffect } from 'react';
 
 export const AdminRouter = () => {
 

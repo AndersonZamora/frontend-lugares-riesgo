@@ -1,4 +1,5 @@
 import { Card, CardContent, Typography } from '@mui/material';
+import { AiTwotonePhone } from "react-icons/ai";
 
 export const CardEmergency = ({ children }) => {
 
@@ -10,6 +11,7 @@ export const CardEmergency = ({ children }) => {
                         {children.tipo}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="div">
+                        <AiTwotonePhone />
                         {children.numero}
                     </Typography>
                     <a href={`tel:${children.numero}`} type='button'>llamar</a>

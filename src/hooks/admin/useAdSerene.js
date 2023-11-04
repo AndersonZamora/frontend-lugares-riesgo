@@ -34,13 +34,19 @@ export const useAdSerene = () => {
             Swal.close();
             navigate('/serene');
         } catch (error) {
-            console.log(error)
             if (error.response) {
                 const { data } = error.response;
-                errorAlert(
-                    `Error al registra: ${data.vcelular} - ${data.vmail}`
-                );
-
+                if (data.erros) {
+                    const { cel, email, msg } = data.erros;
+                    errorAlert(
+                        `Error al registra: ${(email != '') ? email : ''} 
+                        ${(cel != '') ? cel : ''}
+                        ${(msg != '') ? msg : ''}`
+                    );
+                } else {
+                    Swal.close();
+                    errorAlert('Error al registrar');
+                }
             } else {
                 Swal.close();
                 errorAlert('Error al registrar');

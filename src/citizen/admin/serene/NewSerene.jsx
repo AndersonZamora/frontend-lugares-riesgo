@@ -6,7 +6,7 @@ import { useVSignup } from '../../../validator';
 export const NewSerene = () => {
 
     const { nombres, apellidos, celular, correo, contrasenia, formStata, onInputChange } = useFormr({
-        nombres: '', apellidos: '', celular: '', correo: '', contrasenia: '',
+        nombres: '', apellidos: '', celular: '', correo: '', contrasenia: '', dni: '12345678',
     });
 
     const { valNomb, valApell, valCorre, valCelul, valContr, state } = useVSignup(formStata);

@@ -122,7 +122,6 @@ export const NewPlace = () => {
                 className='mapContainer'
             >
             </div>
-
         </LayoutContainerCard>
     )
 }

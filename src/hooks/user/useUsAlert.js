@@ -8,7 +8,6 @@ export const useUsAlert = () => {
 
     const dispatch = useDispatch();
 
-
     const { alertActive, isLoadingAlert, alerts } = useSelector(state => state.usalert);
 
     const starNewAlert = async (model, socket) => {
@@ -17,8 +16,7 @@ export const useUsAlert = () => {
             const { data } = await citizenApi.post('/shimin/suru-tame', model);
             dispatch(onViewAlert({ Id: data.uid, ...model, est: true, estado: 'enviado' }));
             successAlert('Resgistrado');
-            socket.emit('denuncia', `Se a echo una denucia, envia la nueva denuncia con Id: ${data.uid}`);
-
+            socket.emit('denuncia', { Id: data.uid });
             Swal.close();
         } catch (error) {
             Swal.close();
@@ -38,7 +36,7 @@ export const useUsAlert = () => {
         }
     }
 
-    const starLoadAlertSend = async (model) => {
+    const starLoadAlertSend = async () => {
         try {
             progressBar('Cargando...');
             const { data } = await citizenApi.get('/shimin/risuto-suru');

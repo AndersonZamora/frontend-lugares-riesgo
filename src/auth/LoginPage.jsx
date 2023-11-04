@@ -9,7 +9,7 @@ export const LoginPage = () => {
     const navigate = useNavigate();
     const { email, password, formStata, onInputChange } = useFormr({ email: '', password: '' });
     const { valEmail, valPass, state } = useVLogin(formStata);
-    const { startLogin, authState } = useAuthStore();
+    const { startLogin, authState, loadindAuth } = useAuthStore();
 
     const loginSubmit = (event) => {
         event.preventDefault();
@@ -49,11 +49,20 @@ export const LoginPage = () => {
                     />
                 </Form.Group>
                 <br />
-                <div className='text-center'>
-                    <Button disabled={!state} type='onSumit' variant="primary" size="sm">
-                        Ingresar
-                    </Button>
-                </div>
+                {
+                    (loadindAuth) ?
+                        (
+                            <div className='text-center'>
+                                <span className="loader"></span>
+                            </div>
+                        ) : (
+                            <div className='text-center'>
+                                <Button disabled={!state} type='onSumit' variant="primary" size="sm">
+                                    Ingresar
+                                </Button>
+                            </div>
+                        )
+                }
             </Form>
             <hr />
             {

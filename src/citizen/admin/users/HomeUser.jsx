@@ -17,7 +17,6 @@ export const HomeUser = () => {
         startLoadingCitizen();
     }, []);
 
-
     const navigate = useNavigate();
 
     const handleView = (data) => {
@@ -63,7 +62,6 @@ export const HomeUser = () => {
                 <Column field='apellidos' header="Apellidos" sortable />
                 <Column field='celular' header="Celular" sortable />
                 <Column field='correo' header="Correo" />
-
                 <Column body={actionTemplate} header='Ver' headerClassName="w-10rem" />
             </DataTable>
 

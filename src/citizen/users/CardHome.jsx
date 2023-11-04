@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 
 export const CardHome = ({ children, eve }) => {
 
@@ -8,13 +8,15 @@ export const CardHome = ({ children, eve }) => {
             onClick={() => eve(children.ruta)}
             style={{ cursor: 'pointer' }}
         >
-            <Card >
+            <Card
+                style={{ backgroundColor: `${children.back}`, color: `${children.color}` }}
+            >
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                         {children.name}
                     </Typography>
                 </CardContent>
             </Card>
-        </div>
+        </div >
     )
 }

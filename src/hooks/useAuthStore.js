@@ -1,43 +1,56 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { citizenApi } from '../api';
-import { clearErrorMessage, onChecking, onLoadGency, onLoadInfo, onLoadPlaces, onLoadSerenes, onLoadUsers, onLogin, onLogout, onLogoutUi } from '../store';
+import { clearErrorMessage, onCheckingAuht, onLoadGency, onLoadInfo, onLoadPlaces, onLoadSerenes, onLoadUsers, onLogin, onLogout, onLogoutAlert, onLogoutGency, onLogoutInfo, onLogoutPlace, onLogoutSerene, onLogoutUi, onLogoutUser } from '../store';
 import { useUi } from './useUi';
+import { errorAlert } from '../helpers';
 
 export const useAuthStore = () => {
 
-    const { status, user, errorMessage } = useSelector(state => state.auth);
+    const { status, user, errorMessage, loadindAuth } = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const { authState } = useUi();
 
     const startLogin = async ({ email, password }) => {
-        dispatch(onChecking());
+        dispatch(onCheckingAuht(true));
         try {
             const { data } = await citizenApi.post(`/no-roguin-to-toroku/roguin/${authState}`, { email, password });
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime());
             dispatch(onLogin({ name: data.name, uid: data.uid, celular: data.celular, rol: data.rol, logged: true }));
         } catch (error) {
-            console.log(error)
             dispatch(onLogout('Credenciales incorrectas'));
             setTimeout(() => {
                 dispatch(clearErrorMessage());
+                dispatch(onCheckingAuht(false))
+                errorAlert('Credenciales incorrectas')
             }, 10);
         }
     }
 
     const startSignup = async (model) => {
-        dispatch(onChecking());
         try {
+            dispatch(onCheckingAuht(true));
             await citizenApi.post('/no-roguin-to-toroku/atarashi/citizen', model);
             dispatch(onLogout())
             return true;
         } catch (error) {
-            console.log(error)
-            dispatch(onLogout('Credenciales incorrectas'));
+            if (error.response.data) {
+                const { er, erros } = error.response.data
+                if (er) {
+                    const { dni } = erros;
+                    if (dni) {
+                        const { msg } = dni;
+                        console.log(msg)
+                    }
+                } else {
+                    const { cel, dn, email, msg } = erros;
+                    errorAlert(`Error al registra: ${(email != '') ? email : ''} ${(cel != '') ? cel : ''} ${(msg != '') ? msg : ''} ${(dn != '') ? dn : ''}`);
+                }
+            }
             setTimeout(() => {
+                dispatch(onCheckingAuht(false));
                 dispatch(clearErrorMessage());
             }, 10);
-            return false;
         }
     }
 
@@ -57,23 +70,24 @@ export const useAuthStore = () => {
 
     const startLogout = () => {
         localStorage.clear();
-        dispatch(onLogout());
-        dispatch(onLoadUsers());
+        dispatch(onLogoutGency());
+        dispatch(onLogoutInfo());
+        dispatch(onLogoutPlace());
+        dispatch(onLogoutSerene());
+        dispatch(onLogoutUser());
         dispatch(onLogoutUi());
-        dispatch(onLoadSerenes())
-        dispatch(onLoadGency())
-        dispatch(onLoadInfo())
-        dispatch(onLoadPlaces())
-        dispatch(onLoadSerenes())
+        dispatch(onLogoutAlert());
+        setTimeout(() => {
+            dispatch(onLogout());
+        }, 10);
     }
 
     return {
-        //* Propiedades
         errorMessage,
         status,
         user,
         authState,
-        //* Métodos
+        loadindAuth,
         checkAuthToken,
         startLogin,
         startLogout,

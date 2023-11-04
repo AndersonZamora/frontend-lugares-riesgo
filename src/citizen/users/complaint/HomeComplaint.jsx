@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { Typography } from '@mui/material';
 import { errorAlert, progressBar } from '../../../helpers';
 import { useUsAlert } from '../../../hooks';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { SocketContext } from '../../../context/SocketContext';
 
@@ -22,8 +22,6 @@ export const HomeComplaint = () => {
             }
             progressBar('Registrando...');
             starNewAlert(aler, socket)
-            //socket.emit('denuncia', aler);
-
         }, function () {
             errorAlert('Se nego el acceso a la ubicación')
         });

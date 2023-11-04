@@ -4,9 +4,7 @@ export const auserenesSlice = createSlice({
     name: 'serenes',
     initialState: {
         isLoadingSerenes: false,
-        serenes: [
-            // tempEvent
-        ],
+        serenes: [],
         sereneActive: {
             Id: 0,
             apellidos: '',

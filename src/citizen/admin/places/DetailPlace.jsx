@@ -14,7 +14,7 @@ export const DetailPlace = () => {
     }
 
     const { barrio, detalle, direccion, nivel, latitud, longitud, formStata, onInputChange } = useFormr(placeActive);
-    const { valBarr, valDeta, valDire, valNive, valLati, valLong, state } = useVPlace(formStata);
+    const { valBarr, valDeta, valDire, valNive, valLati, valLong } = useVPlace(formStata);
 
     const handleDelete = () => {
         Swal.fire({
@@ -34,9 +34,6 @@ export const DetailPlace = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // if (state) {
-        //     starUpdatePlace(formStata)
-        // }
     }
 
     return (
@@ -115,9 +112,6 @@ export const DetailPlace = () => {
                 </Form.Group>
                 <br />
                 <div className='text-center'>
-                    {/* <Button type='onSumit' variant="outline-success" className="m-1">
-                        Actualizar
-                    </Button> */}
                     <Button onClick={() => handleDelete()} variant="outline-danger" className="m-1">
                         Eliminar
                     </Button>
@@ -126,28 +120,6 @@ export const DetailPlace = () => {
                     </Button>
                 </div>
             </Form>
-            {/* <List sx={{ width: '100%', maxWidth: 360 }}>
-                <ListItem>
-                    <ListItemText
-                        primary="Barrio" secondary={`${placeActive.barrio}`} />
-                </ListItem>
-                <ListItem>
-                    <ListItemText
-                        primary="Nivel" secondary={`${placeActive.nivel}`} />
-                </ListItem>
-                <ListItem>
-                    <ListItemText
-                        primary="Dirección" secondary={`${placeActive.direccion}`} />
-                </ListItem>
-                <ListItem>
-                    <ListItemText
-                        primary="Detalle" secondary={`${placeActive.detalle}`} />
-                </ListItem>
-            </List>
-            <CardActions>
-                <Button onClick={() => handleDelete()} variant="outlined" size="small" color="error">Eliminar</Button>
-                <Button onClick={() => startCancel()} variant="contained" size="small" color="secondary">Regresar</Button>
-            </CardActions> */}
         </LayoutContainerCard>
     )
 }

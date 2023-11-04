@@ -4,9 +4,7 @@ export const ausersSlice = createSlice({
     name: 'users',
     initialState: {
         isLoadingUsers: false,
-        users: [
-            // tempEvent
-        ],
+        users: [],
         userActive: {
             Id: 0,
             apellidos: '',

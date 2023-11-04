@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useAdPlace } from './';
+import { getEnvVariables } from '../helpers';
+const { TOKEN } = getEnvVariables();
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kZXJzb25zdHVkIiwiYSI6ImNsbXI1b3lzZzAzZ3IybHBsdWl3bXhhY2wifQ.p1cEUOXuTxweERs3FMpoRg';
+mapboxgl.accessToken = TOKEN;
 
 export const useMapBox = (puntoInicial) => {
-
 
     const { places } = useAdPlace()
 
@@ -23,7 +24,7 @@ export const useMapBox = (puntoInicial) => {
         const map = new mapboxgl.Map({
             container: mapDiv.current,
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [puntoInicial.lng, puntoInicial.lat], // starting position [lng, lat]
+            center: [puntoInicial.lng, puntoInicial.lat],
             zoom: coords.zoom
         });
 

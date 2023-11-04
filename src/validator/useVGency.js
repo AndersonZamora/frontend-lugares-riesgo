@@ -13,8 +13,8 @@ export const useVGency = (formState = { tipo: '', numero: '' }) => {
     useMemo(() => {
         setValData({
             ...valData,
-            valTipo: (!validator.isEmpty(formState.tipo) && validator.isAlphanumeric(formState.tipo, 'es-ES')) ? '' : 'is-invalid',
-            valNume: (validator.isEmpty(formState.numero) && validator.isLength(formState.numero, { min: 3, max: 12 })) ? '' : 'is-invalid',
+            valTipo: (!validator.isEmpty(formState.tipo) && validator.isLength(formState.tipo, { min: 4, max: 12 }) && validator.isAlphanumeric(formState.tipo, 'es-ES')) ? '' : 'is-invalid',
+            valNume: (!validator.isEmpty(formState.numero) && validator.isLength(formState.numero, { min: 3, max: 12 })) ? '' : 'is-invalid',
         })
     }, [formState]);
 

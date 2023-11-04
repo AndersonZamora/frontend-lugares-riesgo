@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 
-export const LayoutAuth = ({ children, title }) => {
+export const LayoutHist = ({ children }) => {
     return (
         <Grid
             className='animate__animated animate__fadeIn'
@@ -16,23 +16,14 @@ export const LayoutAuth = ({ children, title }) => {
                 lg={10}
                 md={9}
                 sx={{
-                    padding: 3,
                     borderRadius: 2,
-                    width: { sm: 550, md: 800, lg: 1000 }
+                    width: { sm: 550, md: 900, lg: 1300 }
                 }}
             >
                 <div className="card o-hidden border-0 shadow-lg my-5">
                     <div className="card-body p-0">
                         <div className="row">
-                            <div className="col-lg-6 d-none d-lg-block bg-login-image"> </div>
-                            <div className="col-lg-6">
-                                <div className="p-5">
-                                    <div className="text-center">
-                                        <h1 className="h4 text-gray-900 mb-4">{title}</h1>
-                                    </div>
-                                    {children}
-                                </div>
-                            </div>
+                            {children}
                         </div>
                     </div>
                 </div>

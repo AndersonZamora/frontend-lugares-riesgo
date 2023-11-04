@@ -1,17 +1,17 @@
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { AppRouter } from './router';
 import { SocketProvider } from './context/SocketContext';
 
 export const CitizenApp = () => {
     return (
         <Provider store={store}>
-            <BrowserRouter>
+            <HashRouter>
                 <SocketProvider>
                     <AppRouter />
                 </SocketProvider>
-            </BrowserRouter>
+            </HashRouter>
         </Provider>
     )
 }

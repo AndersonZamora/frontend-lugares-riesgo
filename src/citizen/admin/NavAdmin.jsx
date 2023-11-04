@@ -1,5 +1,5 @@
-import { LayoutNav } from '../../layout';
 import { NavLink } from 'react-router-dom';
+import { LayoutNav } from '../../layout';
 import { useAuthStore } from '../../hooks/';
 
 export const NavAdmin = () => {
@@ -18,8 +18,7 @@ export const NavAdmin = () => {
                     to="/"
                     className="navbar-brand"
                 >
-                    {/* <img src={MANITOP} style={{ maxWidth: '50px', marginRight: '8px' }} alt="Logo" className="d-inline-block align-text-top" />*/}
-                    CINCOUT
+                    Vigilantes Online
                 </NavLink >
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

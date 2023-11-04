@@ -1,10 +1,11 @@
-import { LayoutNav } from '../../layout';
 import { NavLink } from 'react-router-dom';
-import { useAuthStore, useSeAlert } from '../../hooks';
-import { AiFillAlert } from 'react-icons/ai'
-import { ModalSerene } from './ModalSerene';
 import { useEffect, useState } from 'react';
-import { Notifications } from 'react-push-notification';
+import { AiFillAlert } from 'react-icons/ai'
+import addNotification from 'react-push-notification';
+import Swal from 'sweetalert2';
+import { LayoutNav } from '../../layout';
+import { useAuthStore, useSeAlert } from '../../hooks';
+import { ModalSerene } from './ModalSerene';
 
 export const NavSerene = () => {
 
@@ -17,20 +18,37 @@ export const NavSerene = () => {
         nav.classList.remove('show');
     }
 
-    const { total, alerts, starLoadAlertsSerene } = useSeAlert();
+    const { total, alerts, alertActive, starLoadAlertsSerene, starUpdateAlert } = useSeAlert();
+
+    useEffect(() => {
+
+        if (alertActive.Id != 0) {
+
+            addNotification({
+                title: 'Alerta enviada',
+                message: `El usuario  ${alertActive.nombres} identificado con DNI: ${alertActive.dni} envio una alertar a las ${alertActive.fecha}`,
+                duration: 9000,
+                native: true
+            })
+
+            Swal.fire({
+                title: `El usuario:  ${alertActive.nombres} - identificado con DNI: ${alertActive.dni} envio 
+                una alertar a las: ${alertActive.fecha}`,
+                showCancelButton: true,
+                confirmButtonText: 'Atender',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('Saved!', '', 'success')
+                    starUpdateAlert({ id: alertActive.Id, estado: 'pendiente' })
+                }
+            })
+
+        }
+    }, [alertActive])
 
     useEffect(() => {
         starLoadAlertsSerene();
     }, []);
-
-    // const handlePush = () => {
-    //     addNotification({
-    //         title: 'Nueva alerta',
-    //         subtitle: 'Revisa las alertas',
-    //         message: 'Hay una alerta',
-    //         theme: 'darkblue',
-    //     });
-    // }
 
     return (
         <LayoutNav>
@@ -38,10 +56,8 @@ export const NavSerene = () => {
                 to="/"
                 className="navbar-brand"
             >
-                CINCOUT
+                Vigilantes Online
             </NavLink >
-
-            <Notifications />
             <div className='view-displ'>
                 <a className=''
                     href="#"
@@ -75,7 +91,6 @@ export const NavSerene = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0" />
-
                 <div className='d-flex'>
                     <a
                         className='view-displ-nor'
@@ -124,8 +139,8 @@ export const NavSerene = () => {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 aler={alerts}
+                handle={starUpdateAlert}
             />
-
         </LayoutNav>
     )
 }

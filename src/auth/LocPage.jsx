@@ -14,7 +14,7 @@ export const LocPage = () => {
             direction='column'
             alignItems='center'
             justifyContent='center'
-            sx={{ minHeight: '100vh', padding: 4 }}
+            sx={{ minHeight: '100vh', padding: 4, backgroundColor: '#9d75e6' }}
         >
             <Grid item
                 className="justify-content-center"
@@ -32,7 +32,7 @@ export const LocPage = () => {
                         <div className="row">
                             <div className="col-lg-6">
                                 <h1></h1>
-                                <h3 className='text-center mt-5'>Ingresea al Sistema</h3>
+                                <h3 className='text-center mt-5'>Ingrese al Sistema</h3>
                                 <br />
                                 <div className="text-center">
                                     <Button

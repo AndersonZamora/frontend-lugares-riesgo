@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { citizenApi } from '../../api';
 import { errorAlert, progressBar, successAlert } from '../../helpers';
-import { onDeleteUsers, onIsLoagingUser, onLoadUsers, onViewUser } from '../../store';
+import { onClearAlert, onDeleteAlert, onDeleteUsers, onIsLoagingUser, onLoadAlerts, onLoadUsers, onViewUser } from '../../store';
 
 export const useAdUsers = () => {
 
@@ -11,6 +11,7 @@ export const useAdUsers = () => {
     const navigate = useNavigate();
 
     const { users, isLoadingUsers, userActive } = useSelector(state => state.ausers);
+    const { alerts } = useSelector(state => state.usalert);
 
     const startLoadingCitizen = async () => {
         try {
@@ -25,7 +26,21 @@ export const useAdUsers = () => {
         }
     }
 
+    const startLoadingCitizenAlerts = async () => {
+        try {
+            progressBar('Cargando historial...');
+            const { data } = await citizenApi.get(`/kanrisha/risuto/alerts/${userActive.Id}`);
+            dispatch(onLoadAlerts(data.alertas))
+            Swal.close();
+        } catch (error) {
+            Swal.close();
+            errorAlert('Error al registrar');
+        }
+
+    }
+
     const startActiveUser = (model) => {
+        dispatch(onClearAlert());
         dispatch(onViewUser({ ...model, state: true }));
     }
 
@@ -47,15 +62,28 @@ export const useAdUsers = () => {
         }
     }
 
+    const startDeleteUserAlert = async (id = 0) => {
+        try {
+            progressBar('Eliminando...');
+            await citizenApi.delete(`/kanrisha/risuto/alerts/user/${id}`);
+            dispatch(onDeleteAlert(id));
+            Swal.close();
+        } catch (error) {
+            Swal.close();
+            errorAlert('Error al eliminar');
+        }
+    }
+
     return {
-        //* Propiedades
         users,
         isLoadingUsers,
         userActive,
-        //* Metodos
+        alerts,
         startLoadingCitizen,
         startDeleteUser,
         startActiveUser,
         startCancel,
+        startLoadingCitizenAlerts,
+        startDeleteUserAlert
     }
 }

@@ -29,17 +29,24 @@ export const useAdGency = () => {
         try {
             progressBar('Registrando...');
             const { data } = await citizenApi.post('/otoko', model);
-            console.log(data);
-            dispatch(onAddNewGency({ ...data.succ }));
+            dispatch(onAddNewGency({ Id: data.uid, tipo: data.tipo, numero: model.numero }));
             successAlert('Resgistrado');
             Swal.close();
             navigate('/emergency');
         } catch (error) {
             if (error.response) {
                 const { data } = error.response;
-                errorAlert(
-                    `Error al registra: ${data.vtipo} ${data.vnumero}`
-                );
+                if (data.erros) {
+                    const { tip, cel, msg } = data.erros;
+                    errorAlert(
+                        `Error al registra: ${(tip != '') ? tip : ''} 
+                        ${(cel != '') ? cel : ''}
+                        ${(msg != '') ? msg : ''}`
+                    );
+                } else {
+                    Swal.close();
+                    errorAlert('Error al registrar');
+                }
             } else {
                 Swal.close();
                 errorAlert('Error al registrar');

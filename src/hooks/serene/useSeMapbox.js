@@ -45,7 +45,6 @@ export const useSeMapbox = (puntoInicial) => {
         setTimeout(() => {
             if (alerts.length > 0) {
                 alerts.map(pla => {
-
                     const popup = new mapboxgl.Popup().setHTML(`
                     <p>Fecha y Hora: ${pla.fecha}</p>
                     <p>DNI: ${pla.dni}</p>

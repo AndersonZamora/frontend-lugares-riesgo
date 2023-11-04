@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import validator from "validator";
 
-export const useVSignup = (formState = { nombres: '', apellidos: '', celular: '', correo: '', contrasenia: '' }) => {
+export const useVSignup = (formState = { nombres: '', apellidos: '', celular: '', correo: '', contrasenia: '', dni: '' }) => {
 
     const [valData, setValData] = useState({
         valNomb: '',
@@ -9,6 +9,7 @@ export const useVSignup = (formState = { nombres: '', apellidos: '', celular: ''
         valCelul: '',
         valCorre: '',
         valContr: '',
+        valDNI: '',
     });
 
     const [val, setVal] = useState({ state: false });
@@ -27,6 +28,9 @@ export const useVSignup = (formState = { nombres: '', apellidos: '', celular: ''
             valCorre: (validator.isEmail(formState.correo)) ? '' : 'is-invalid',
             valContr: (!validator.isEmpty(formState.contrasenia) && validator.isLength(formState.contrasenia, { min: 5, max: 15 }) &&
                 validator.isAlphanumeric(formState.contrasenia, 'es-ES', { ignore: '#@' })) ? '' : 'is-invalid',
+            valDNI: (!validator.isEmpty(formState.dni) &&
+                validator.isNumeric(formState.dni) &&
+                validator.isLength(formState.dni, { min: 8, max: 8 })) ? '' : 'is-invalid',
         })
     }, [formState]);
 
@@ -37,6 +41,7 @@ export const useVSignup = (formState = { nombres: '', apellidos: '', celular: ''
                 validator.isEmpty(valData.valApell) &&
                 validator.isEmpty(valData.valCelul) &&
                 validator.isEmpty(valData.valCorre) &&
+                validator.isEmpty(valData.valDNI) &&
                 validator.isEmpty(valData.valContr) ? true : false,
         })
     }, [valData]);

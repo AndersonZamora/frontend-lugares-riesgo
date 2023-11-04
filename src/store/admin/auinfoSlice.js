@@ -4,9 +4,7 @@ export const auinfoSlice = createSlice({
     name: 'info',
     initialState: {
         isLoadingInfo: false,
-        infos: [
-            // tempEvent
-        ],
+        infos: [],
         infoActive: {
             Id: 0,
             datos: '',
